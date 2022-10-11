@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
 import { BaseAggregate } from 'src/api/common/model/aggregate.base';
 import { ICompanyId, ICompanyProperty } from '../domain/company.interface';
+import { CompanyErrorMessage } from '../infrastructure/company.entity';
 
 export class FindOneCompanyParam {
   @IsNumber()
@@ -17,13 +18,13 @@ export type FindOneCompanyResponse = {
 export class CreateCompanyBody
   implements Omit<ICompanyProperty, keyof BaseAggregate<ICompanyId>>
 {
-  @IsString()
+  @IsString({ message: CompanyErrorMessage.name })
   name: string;
 
-  @IsString()
+  @IsString({ message: CompanyErrorMessage.country })
   country: string;
 
-  @IsString()
+  @IsString({ message: CompanyErrorMessage.region })
   region: string;
 }
 
