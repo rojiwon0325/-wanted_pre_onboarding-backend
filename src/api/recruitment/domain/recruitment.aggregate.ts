@@ -5,7 +5,7 @@ import {
   IRecruitmentDetailReponseType,
   IRecruitmentId,
   IRecruitmentProps,
-  IRecruitmentReponseType,
+  IRecruitmentResponseType,
 } from './recruitment.interface';
 import { httpExceptionProvider } from 'src/api/common/provider/exception.provider';
 
@@ -43,7 +43,7 @@ export class Recruitment
       id ?? 0,
       company_id,
       position,
-      compensation,
+      compensation < 0 ? 0 : compensation,
       description,
       skill,
       created_at ?? now,
@@ -61,9 +61,8 @@ export class Recruitment
     return agg;
   }
 
-  getResponseType(): IRecruitmentReponseType {
+  getResponseType(): IRecruitmentResponseType {
     const { id, position, compensation, skill, company } = this;
-
     return {
       id,
       position,

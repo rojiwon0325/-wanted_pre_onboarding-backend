@@ -1,4 +1,4 @@
-import { map_CompanyEntity_to_CompanyAggregate } from './../../company/infrastructure/company.mapper';
+import { map_CompanyEntity_to_CompanyAggregate } from 'src/api/company/infrastructure/company.mapper';
 import { Injectable } from '@nestjs/common';
 import { IEntityMapper } from 'src/api/common/interface/mapper.interface';
 import { Recruitment } from '../domain/recruitment.aggregate';

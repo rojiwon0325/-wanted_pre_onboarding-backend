@@ -14,18 +14,18 @@ export interface IRecruitmentProperty extends BaseAggregate<IRecruitmentId> {
   skill: string;
 }
 
-export type IRecruitmentReponseType = Pick<
+export type IRecruitmentResponseType = Pick<
   IRecruitmentProperty,
   'id' | 'position' | 'compensation' | 'skill'
 > & { company?: ICompanyReponseType };
 
-export type IRecruitmentDetailReponseType = IRecruitmentReponseType &
+export type IRecruitmentDetailReponseType = IRecruitmentResponseType &
   Pick<IRecruitmentProperty, 'description'> & {
     other_recruitments: IRecruitmentId[];
   };
 
 export type IRecruitmentMethod = {
-  getResponseType: () => IRecruitmentReponseType;
+  getResponseType: () => IRecruitmentResponseType;
   getDetailResponseType: (
     recruitments: IRecruitmentId[],
   ) => IRecruitmentDetailReponseType;

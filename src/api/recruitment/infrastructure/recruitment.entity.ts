@@ -1,5 +1,5 @@
 import { TypeOrmBaseEntity } from 'src/api/common/model/typeorm-entity.base';
-import { Column, Entity, ManyToOne, RelationId } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { IsNumber, IsString } from 'class-validator';
 import { CompanyEntity } from 'src/api/company/infrastructure/company.entity';
 import { ICompanyId } from 'src/api/company/domain/company.interface';
@@ -14,11 +14,12 @@ export const RecruitmentErrorMessage = {
 
 @Entity({ name: 'recruitments' })
 export class RecruitmentEntity extends TypeOrmBaseEntity {
-  @RelationId((recruitment: RecruitmentEntity) => recruitment.company)
+  @Column()
   @IsNumber({}, { message: RecruitmentErrorMessage.company_id })
   company_id: ICompanyId;
 
   @ManyToOne(() => CompanyEntity)
+  @JoinColumn({ name: 'company_id' })
   company?: CompanyEntity;
 
   @Column()

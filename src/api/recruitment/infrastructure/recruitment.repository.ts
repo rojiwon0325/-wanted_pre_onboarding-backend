@@ -1,13 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IEntityMapper } from 'src/api/common/interface/mapper.interface';
+import { httpExceptionProvider } from 'src/api/common/provider/exception.provider';
+import { ExceptionMessage } from 'src/api/common/provider/message.provider';
 import { TypeOrmBaseRepository } from 'src/api/common/provider/repository.base';
 import { FindOptionsWhere, Like, Not, Repository } from 'typeorm';
-import {
-  IRecruitment,
-  IRecruitmentId,
-  IRecruitmentReponseType,
-} from '../domain/recruitment.interface';
+import { IRecruitment, IRecruitmentId } from '../domain/recruitment.interface';
 import {
   FindIdsDTO,
   FindManyOption,
@@ -31,16 +29,26 @@ export class RecruitmentRepository
   }
 
   async findIds({ id, company_id }: FindIdsDTO): Promise<IRecruitmentId[]> {
-    return this.getRepository().find({
+    const ids = await this.getRepository().find({
       where: { company_id, id: Not(id) },
       select: { id: true },
-    }) as unknown as Promise<IRecruitmentId[]>;
+    });
+    return ids.map(({ id }) => id);
   }
 
-  async findManyRelation({
-    search,
-    page = 1,
-  }: FindManyOption): Promise<IRecruitmentReponseType[]> {
+  async findOne(id: IRecruitmentId, relation = false): Promise<IRecruitment> {
+    const entity = await this.getRepository().findOne({
+      where: { id },
+      relations: { company: relation },
+    });
+    if (!entity) {
+      throw httpExceptionProvider('404', ExceptionMessage.NotFoundAggregate);
+    }
+    return this.getMapper().toAggregate(entity);
+  }
+
+  async findMany(option?: FindManyOption): Promise<IRecruitment[]> {
+    const { search, page = 1 } = option ?? {};
     const where: FindOptionsWhere<RecruitmentEntity>[] = [];
     if (search) {
       const keyword = `%${search}%`;
@@ -52,12 +60,11 @@ export class RecruitmentRepository
     }
     const entities = await this.getRepository().find({
       ...(search ? { where } : {}),
+      relations: { company: true },
       take: 15,
       skip: 15 * (page - 1),
-      order: { id: 'desc' },
+      order: { created_at: 'desc' },
     });
-    return entities.map((entity) =>
-      this.getMapper().toAggregate(entity).getResponseType(),
-    );
+    return entities.map(this.getMapper().toAggregate);
   }
 }
