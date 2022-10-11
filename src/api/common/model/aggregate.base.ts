@@ -1,9 +1,9 @@
-import { IBaseAggregate } from '../interface/entity.interface';
+import { IRootEntity } from '../interface/entity.interface';
 import { Entity } from './entity.base';
 
 export abstract class BaseAggregate<IId>
   extends Entity<IId>
-  implements IBaseAggregate<IId>
+  implements IRootEntity<IId>
 {
   constructor(
     readonly id: IId,

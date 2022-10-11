@@ -1,6 +1,6 @@
-import { IBaseAggregate } from './entity.interface';
+import { BaseAggregate } from '../model/aggregate.base';
 
-export interface IBaseRepository<IId, IAggregate extends IBaseAggregate<IId>> {
+export interface IBaseRepository<IId, IAggregate extends BaseAggregate<IId>> {
   findOne: (id: IId) => Promise<IAggregate>;
   findMany: () => Promise<IAggregate[]>;
   save: (aggregate: IAggregate) => Promise<IAggregate>;
