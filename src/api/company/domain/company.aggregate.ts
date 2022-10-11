@@ -1,5 +1,10 @@
 import { BaseAggregate } from 'src/api/common/model/aggregate.base';
-import { ICompany, ICompanyId, ICompanyProps } from './company.interface';
+import {
+  ICompany,
+  ICompanyId,
+  ICompanyProps,
+  ICompanyReponseType,
+} from './company.interface';
 
 export class Company extends BaseAggregate<ICompanyId> implements ICompany {
   private constructor(
@@ -24,5 +29,10 @@ export class Company extends BaseAggregate<ICompanyId> implements ICompany {
       created_at ?? now,
       updated_at ?? now,
     );
+  }
+
+  getResponseType(): ICompanyReponseType {
+    const { name, country, region } = this;
+    return { name, country, region };
   }
 }

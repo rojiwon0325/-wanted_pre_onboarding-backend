@@ -8,7 +8,16 @@ export interface ICompanyProperty extends BaseAggregate<ICompanyId> {
   region: string;
 }
 
-export type ICompany = ICompanyProperty;
+export type ICompanyReponseType = Omit<
+  ICompanyProperty,
+  keyof BaseAggregate<ICompanyId>
+>;
+
+export type ICompanyMethod = {
+  getResponseType: () => ICompanyReponseType;
+};
+
+export type ICompany = ICompanyProperty & ICompanyMethod;
 
 export type ICompanyProps = Omit<
   ICompanyProperty,
