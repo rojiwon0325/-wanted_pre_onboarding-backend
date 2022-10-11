@@ -8,6 +8,8 @@ export interface ICompanyProperty extends BaseAggregate<ICompanyId> {
   region: string;
 }
 
+export type ICompany = ICompanyProperty;
+
 export type ICompanyProps = Omit<
   ICompanyProperty,
   keyof BaseAggregate<ICompanyId>

@@ -1,15 +1,8 @@
 import { BaseAggregate } from 'src/api/common/model/aggregate.base';
-import {
-  ICompanyId,
-  ICompanyProperty,
-  ICompanyProps,
-} from './company.interface';
+import { ICompany, ICompanyId, ICompanyProps } from './company.interface';
 
-export class Company
-  extends BaseAggregate<ICompanyId>
-  implements ICompanyProperty
-{
-  constructor(
+export class Company extends BaseAggregate<ICompanyId> implements ICompany {
+  private constructor(
     id: ICompanyId,
     public name: string,
     public country: string,
@@ -20,7 +13,7 @@ export class Company
     super(id, created_at, updated_at);
   }
 
-  static get(props: ICompanyProps): Company {
+  static get(props: ICompanyProps): ICompany {
     const { id, name, country, region, created_at, updated_at } = props;
     const now = new Date();
     return new Company(
