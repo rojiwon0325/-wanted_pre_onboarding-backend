@@ -1,14 +1,14 @@
 import { FindOneOptions, Repository } from 'typeorm';
-import { IBaseAggregate } from '../interface/entity.interface';
 import { IEntityMapper } from '../interface/mapper.interface';
 import { IBaseRepository } from '../interface/repository.interface';
+import { BaseAggregate } from '../model/aggregate.base';
 import { TypeOrmBaseEntity } from '../model/typeorm-entity.base';
 import { httpExceptionProvider } from './exception.provider';
 import { ExceptionMessage } from './message.provider';
 
 export abstract class TypeOrmBaseRepository<
   IId,
-  IAggregate extends IBaseAggregate<IId>,
+  IAggregate extends BaseAggregate<IId>,
   IRootEntity extends TypeOrmBaseEntity,
 > implements IBaseRepository<IId, IAggregate>
 {

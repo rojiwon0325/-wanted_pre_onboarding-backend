@@ -6,10 +6,10 @@ import {
 } from 'typeorm';
 import { IsDate, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
-import { IBaseAggregate } from '../interface/entity.interface';
+import { IRootEntity } from '../interface/entity.interface';
 
 @Entity()
-export abstract class TypeOrmBaseEntity implements IBaseAggregate<number> {
+export abstract class TypeOrmBaseEntity implements IRootEntity<number> {
   @PrimaryGeneratedColumn()
   @IsNumber()
   id: number;
