@@ -1,4 +1,4 @@
-name: Jest coverage comment
+name: Test Coverage Comment
 on:
   pull_request:
     branches: [ main ]
