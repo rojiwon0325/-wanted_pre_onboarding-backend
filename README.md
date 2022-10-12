@@ -4,9 +4,7 @@
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=plastic&logo=jest&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=plastic&logo=mysql&logoColor=white)
 
-<!--
-![CI](https://github.com/rojiwon0325/wanted_pre_onboarding-backend/actions/workflows/pr_cov_report.yml/badge.svg)
--->
+![Test Status](https://github.com/rojiwon0325/wanted_pre_onboarding-backend/actions/workflows/push_cov_report.yml/badge.svg)
 
 > 원티드 프리온보딩 백엔드 선발 과제입니다.
 

@@ -1,8 +1,8 @@
-name: 'Deploy Coverage Report'
+name: 'Test'
 
 on:
   push:
-    branches: [ _main ]
+    branches: [ main ]
     
 jobs:            
   Deploy_Coverage_Report:
