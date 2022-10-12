@@ -1,20 +1,25 @@
-name: Jest coverage comment
+name: Test Coverage Comment
 on:
   pull_request:
     branches: [ main ]
     
 jobs:
-  build:
+  coverage_comment:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Install
         run: npm ci
 
-      - name: Run tests
-        run: |
-          npx jest --coverage --coverageReporters json-summary
+      - name: Test
+        run: npx jest --coverage --coverageReporters json-summary
 
-      - name: Jest coverage comment
+
+      - name: Comment
+        id: coverageComment
         uses: MishaKav/jest-coverage-comment@main
+        with:
+          titie: Test Coverage Report
+          badge-title: coverage

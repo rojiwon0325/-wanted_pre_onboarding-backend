@@ -5,6 +5,7 @@
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=plastic&logo=mysql&logoColor=white)
 
 ![Test Status](https://github.com/rojiwon0325/wanted_pre_onboarding-backend/actions/workflows/push_cov_report.yml/badge.svg)
+![Test Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/rojiwon0325/f0eca20e328effec47d8142ce7ab90ef/raw/jest-coverage-comment__main.json)
 
 > 원티드 프리온보딩 백엔드 선발 과제입니다.
 
