@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     
 jobs:            
-  test:
+  deploy_coverage:
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,7 +20,7 @@ jobs:
         run: npm ci
 
       - name: Build  
-        run: npx jest --coverage --coverageReporters json-summary
+        run: npm run test:cov
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
