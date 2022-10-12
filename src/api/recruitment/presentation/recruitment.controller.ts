@@ -26,7 +26,7 @@ import {
   UpdateRecruitmentResponse,
 } from './recruitment.controller.dto';
 
-@Controller('Recruitment')
+@Controller('recruitment')
 export class RecruitmentController {
   constructor(private readonly recruitmentService: RecruitmentService) {}
 
