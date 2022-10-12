@@ -18,7 +18,7 @@ export class RecruitmentEntity extends TypeOrmBaseEntity {
   @IsNumber({}, { message: RecruitmentErrorMessage.company_id })
   company_id: ICompanyId;
 
-  @ManyToOne(() => CompanyEntity)
+  @ManyToOne(() => CompanyEntity, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'company_id' })
   company?: CompanyEntity;
 
